@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerEditar">
+   <children>
+      <TextField fx:id="txtEditarLogin" editable="false" layoutX="185.0" layoutY="73.0" prefHeight="25.0" prefWidth="230.0" />
+      <Label layoutX="185.0" layoutY="46.0" text="Login">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="185.0" layoutY="98.0" text="Senha">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtEditarSenha" layoutX="185.0" layoutY="125.0" prefHeight="25.0" prefWidth="230.0" />
+      <Label layoutX="185.0" layoutY="150.0" text="Repita Senha">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtEditarSenhaConfirma" layoutX="185.0" layoutY="177.0" prefHeight="25.0" prefWidth="230.0" />
+      <Button layoutX="185.0" layoutY="212.0" mnemonicParsing="false" onMouseClicked="#editarUsuario" prefHeight="25.0" prefWidth="230.0" text="Editar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="185.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#retornarHome" prefHeight="25.0" prefWidth="230.0" text="Cancelar" textFill="RED">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCarregar" layoutX="534.0" layoutY="361.0" mnemonicParsing="false" onAction="#carregarDados" text="Button" visible="false" />
+      <Label layoutX="300.0" layoutY="104.0" text="* pode estar criptografada" textFill="#1945bc">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="chkCrip" layoutX="259.0" layoutY="271.0" mnemonicParsing="false" text="Criptografar" />
+      <Label fx:id="lblAviso" layoutX="185.0" layoutY="300.0" text="Preencha todos os campos corretamente!" textFill="RED" underline="true" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

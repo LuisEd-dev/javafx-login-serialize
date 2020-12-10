@@ -2,17 +2,14 @@ package sample;
 
 import classes.MD5;
 import classes.Usuario;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 
-public class Controller implements Serializable{
+public class Controller {
+
 
     @FXML
     private Tab tabLogin;
@@ -48,7 +45,11 @@ public class Controller implements Serializable{
     private TextArea txtUsuarios;
 
     @FXML
-    void cadastrar(MouseEvent event) throws NoSuchAlgorithmException {
+    private TextField txtUsuarioOpcoes;
+
+
+    @FXML
+    void cadastrar(MouseEvent event) throws NoSuchAlgorithmException, IOException {
         if(!txtCadastroLogin.getText().equals("") && !txtCadastroSenha.getText().equals("")){
             Usuario cadastro = new Usuario(txtCadastroLogin.getText(), txtCadastroSenha.getText(), chkCrip.isSelected(), "cadastrar");
 
@@ -73,7 +74,7 @@ public class Controller implements Serializable{
     }
 
     @FXML
-    void logar(MouseEvent event) throws NoSuchAlgorithmException{
+    void logar(MouseEvent event) throws NoSuchAlgorithmException, IOException {
 
         if(!txtLoginUser.getText().equals("") && !txtLoginSenha.getText().equals("")) {
 
@@ -90,8 +91,7 @@ public class Controller implements Serializable{
                     Main.changeScreen("erro");
                 }
             } catch (FileNotFoundException e) {
-                Main.changeScreen("erro");
-                System.out.println("Usuario não existe!");
+                Main.changeScreen("nao_existe");
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -102,17 +102,43 @@ public class Controller implements Serializable{
             Main.changeScreen("vazio");
         }
     }
+
     @FXML
-    void retornarLogin(MouseEvent event) {
+    void retornarLogin(MouseEvent event) throws IOException {
         Main.changeScreen("login");
     }
     @FXML
-    void carregarUsuarios(MouseEvent event) {
-        File[] arquivos = new File("contas/").listFiles();
+    void retornarHome(MouseEvent event) throws IOException {
+        Main.changeScreen("home");
+    }
 
+    @FXML
+    void carregarUsuarios(MouseEvent event) {
+
+        File[] arquivos = new File("contas/").listFiles();
+        txtUsuarios.setText(null);
         for (File arquivo : arquivos) {
-            txtUsuarios.appendText(arquivo.getName() + "\n");
+            txtUsuarios.appendText(arquivo.getName().split(".acc")[0] + "\n");
         }
+    }
+
+    @FXML
+    void deleteUsuario(MouseEvent event) throws IOException {
+        File usuario = new File("contas/" + txtUsuarioOpcoes.getText() + ".acc");
+        if(usuario.delete())
+            Main.changeScreen("excluido");
+    }
+
+    @FXML
+    void editeUsuario(MouseEvent event) throws IOException {
+
+        if(!txtUsuarioOpcoes.getText().equals("") && txtUsuarios.getText().contains(txtUsuarioOpcoes.getText())){
+            Main.getStage().setTitle(txtUsuarioOpcoes.getText());
+            Main.changeScreen("editar");
+        } else {
+            txtUsuarioOpcoes.setText("Digite Corretamente!");
+        }
+
     }
 
 }
