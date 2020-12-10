@@ -15,8 +15,9 @@ public class ControllerEditar {
 
     @FXML
     protected void initialize()  {
+        txtEditarLogin.setText(Main.getStage().getTitle());
         btnCarregar.fire();
-        btnCarregar.setDisable(true);
+        //btnCarregar.setDisable(true);
     }
 
     @FXML
@@ -28,9 +29,6 @@ public class ControllerEditar {
 
     @FXML
     void carregarDados(ActionEvent event) throws IOException {
-
-        txtEditarLogin.setText(Main.getStage().getTitle());
-
         try {
             FileInputStream file = new FileInputStream("contas/" + txtEditarLogin.getText() + ".acc");
             ObjectInputStream object = new ObjectInputStream(file);

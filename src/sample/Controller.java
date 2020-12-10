@@ -2,6 +2,8 @@ package sample;
 
 import classes.MD5;
 import classes.Usuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -10,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Controller {
 
+    private ObservableList itens = FXCollections.observableArrayList();
 
     @FXML
     private Tab tabLogin;
@@ -42,10 +45,10 @@ public class Controller {
     private TabPane tabPane;
 
     @FXML
-    private TextArea txtUsuarios;
+    private TextField txtUsuarioOpcoes;
 
     @FXML
-    private TextField txtUsuarioOpcoes;
+    private ComboBox<?> combo;
 
 
     @FXML
@@ -115,16 +118,21 @@ public class Controller {
     @FXML
     void carregarUsuarios(MouseEvent event) {
 
+        combo.getItems().clear();
+        itens.removeAll();
+
         File[] arquivos = new File("contas/").listFiles();
-        txtUsuarios.setText(null);
+
         for (File arquivo : arquivos) {
-            txtUsuarios.appendText(arquivo.getName().split(".acc")[0] + "\n");
+            itens.add(arquivo.getName().split(".acc")[0]);
         }
+
+        combo.setItems(itens);
     }
 
     @FXML
     void deleteUsuario(MouseEvent event) throws IOException {
-        File usuario = new File("contas/" + txtUsuarioOpcoes.getText() + ".acc");
+        File usuario = new File("contas/" + combo.valueProperty().get() + ".acc");
         if(usuario.delete())
             Main.changeScreen("excluido");
     }
@@ -132,11 +140,11 @@ public class Controller {
     @FXML
     void editeUsuario(MouseEvent event) throws IOException {
 
-        if(!txtUsuarioOpcoes.getText().equals("") && txtUsuarios.getText().contains(txtUsuarioOpcoes.getText())){
-            Main.getStage().setTitle(txtUsuarioOpcoes.getText());
+        if(combo.valueProperty().get() != null){
+            Main.getStage().setTitle(String.valueOf(combo.valueProperty().get()));
             Main.changeScreen("editar");
         } else {
-            txtUsuarioOpcoes.setText("Digite Corretamente!");
+            Main.changeScreen("vazio");
         }
 
     }

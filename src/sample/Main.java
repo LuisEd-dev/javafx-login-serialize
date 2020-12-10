@@ -49,6 +49,7 @@ public class Main extends Application {
         excluidoScene = new Scene(fxmlExcluido);
 
         primaryStage.setScene(loginScene);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }
@@ -74,7 +75,7 @@ public class Main extends Application {
                 break;
             case "nao_existe":
                 stage.setScene(naoExisteScene);
-                stage.setTitle("ERRO");
+                stage.setTitle("NAO EXISTE");
                 break;
             case "vazio":
                 stage.setScene(vazioScene);
