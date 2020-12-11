@@ -1,11 +1,11 @@
-package sample;
+package sample.controllers;
 
-import classes.MD5;
 import classes.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
+import sample.Main;
 
 
 import java.io.*;

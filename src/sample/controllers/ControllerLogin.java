@@ -1,18 +1,24 @@
-package sample;
+package sample.controllers;
 
 import classes.MD5;
 import classes.Usuario;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import sample.Main;
+
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 
-public class Controller {
+public class ControllerLogin extends Controller {
 
-    private ObservableList itens = FXCollections.observableArrayList();
+    @FXML
+    private TabPane tabPane;
 
     @FXML
     private Tab tabLogin;
@@ -21,10 +27,10 @@ public class Controller {
     private TextField txtLoginUser;
 
     @FXML
-    private Button btnLogin;
+    private PasswordField txtLoginSenha;
 
     @FXML
-    private PasswordField txtLoginSenha;
+    private Button btnLogin;
 
     @FXML
     private Tab tabCadastro;
@@ -33,23 +39,13 @@ public class Controller {
     private TextField txtCadastroLogin;
 
     @FXML
+    private PasswordField txtCadastroSenha;
+
+    @FXML
     private Button btnCadastrar;
 
     @FXML
     private CheckBox chkCrip;
-
-    @FXML
-    private PasswordField txtCadastroSenha;
-
-    @FXML
-    private TabPane tabPane;
-
-    @FXML
-    private TextField txtUsuarioOpcoes;
-
-    @FXML
-    private ComboBox<?> combo;
-
 
     @FXML
     void cadastrar(MouseEvent event) throws NoSuchAlgorithmException, IOException {
@@ -104,49 +100,6 @@ public class Controller {
         } else {
             Main.changeScreen("vazio");
         }
-    }
-
-    @FXML
-    void retornarLogin(MouseEvent event) throws IOException {
-        Main.changeScreen("login");
-    }
-    @FXML
-    void retornarHome(MouseEvent event) throws IOException {
-        Main.changeScreen("home");
-    }
-
-    @FXML
-    void carregarUsuarios(MouseEvent event) {
-
-        combo.getItems().clear();
-        itens.removeAll();
-
-        File[] arquivos = new File("contas/").listFiles();
-
-        for (File arquivo : arquivos) {
-            itens.add(arquivo.getName().split(".acc")[0]);
-        }
-
-        combo.setItems(itens);
-    }
-
-    @FXML
-    void deleteUsuario(MouseEvent event) throws IOException {
-        File usuario = new File("contas/" + combo.valueProperty().get() + ".acc");
-        if(usuario.delete())
-            Main.changeScreen("excluido");
-    }
-
-    @FXML
-    void editeUsuario(MouseEvent event) throws IOException {
-
-        if(combo.valueProperty().get() != null){
-            Main.getStage().setTitle(String.valueOf(combo.valueProperty().get()));
-            Main.changeScreen("editar");
-        } else {
-            Main.changeScreen("vazio");
-        }
-
     }
 
 }

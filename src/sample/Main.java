@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,25 +26,25 @@ public class Main extends Application {
         stage = primaryStage;
         stage.setTitle("TELA INICIAL");
 
-        Parent fxmlLogin = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent fxmlLogin = FXMLLoader.load(getClass().getResource("telas/login.fxml"));
         loginScene = new Scene(fxmlLogin);
 
-        Parent fxmlHome = FXMLLoader.load(getClass().getResource("home.fxml"));
+        Parent fxmlHome = FXMLLoader.load(getClass().getResource("telas/home.fxml"));
         homeScene = new Scene(fxmlHome);
 
-        Parent fxmlErro = FXMLLoader.load(getClass().getResource("erro.fxml"));
+        Parent fxmlErro = FXMLLoader.load(getClass().getResource("telas/erro.fxml"));
         erroScene = new Scene(fxmlErro);
 
-        Parent fxmlNaoExiste = FXMLLoader.load(getClass().getResource("naoExiste.fxml"));
+        Parent fxmlNaoExiste = FXMLLoader.load(getClass().getResource("telas/naoExiste.fxml"));
         naoExisteScene = new Scene(fxmlNaoExiste);
 
-        Parent fxmlPreencher = FXMLLoader.load(getClass().getResource("preencher.fxml"));
+        Parent fxmlPreencher = FXMLLoader.load(getClass().getResource("telas/preencher.fxml"));
         vazioScene = new Scene(fxmlPreencher);
 
-        Parent fxmlSucesso = FXMLLoader.load(getClass().getResource("sucesso.fxml"));
+        Parent fxmlSucesso = FXMLLoader.load(getClass().getResource("telas/sucesso.fxml"));
         sucessoScene = new Scene(fxmlSucesso);
 
-        Parent fxmlExcluido = FXMLLoader.load(getClass().getResource("excluido.fxml"));
+        Parent fxmlExcluido = FXMLLoader.load(getClass().getResource("telas/excluido.fxml"));
         excluidoScene = new Scene(fxmlExcluido);
 
         primaryStage.setScene(loginScene);
@@ -90,7 +89,7 @@ public class Main extends Application {
                 stage.setTitle("EXCLUIDO");
                 break;
             case "editar":
-                Parent fxmlEditar = FXMLLoader.load(Main.class.getResource("editar.fxml"));
+                Parent fxmlEditar = FXMLLoader.load(Main.class.getResource("telas/editar.fxml"));
                 editarScene = new Scene(fxmlEditar);
 
                 stage.setScene(editarScene);
