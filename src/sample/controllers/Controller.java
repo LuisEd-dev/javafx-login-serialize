@@ -21,6 +21,4 @@ public class Controller {
     void retornarHome(MouseEvent event) throws IOException {
         Main.changeScreen("home");
     }
-
-
 }

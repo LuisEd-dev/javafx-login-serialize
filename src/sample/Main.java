@@ -19,6 +19,8 @@ public class Main extends Application {
     private static Scene sucessoScene;
     private static Scene excluidoScene;
     private static Scene editarScene;
+    private static Scene escolherScene;
+    private static Scene editadoScene;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -41,11 +43,17 @@ public class Main extends Application {
         Parent fxmlPreencher = FXMLLoader.load(getClass().getResource("telas/preencher.fxml"));
         vazioScene = new Scene(fxmlPreencher);
 
-        Parent fxmlSucesso = FXMLLoader.load(getClass().getResource("telas/sucesso.fxml"));
+        Parent fxmlSucesso = FXMLLoader.load(getClass().getResource("telas/cadastrado.fxml"));
         sucessoScene = new Scene(fxmlSucesso);
 
         Parent fxmlExcluido = FXMLLoader.load(getClass().getResource("telas/excluido.fxml"));
         excluidoScene = new Scene(fxmlExcluido);
+
+        Parent fxmlEscolher = FXMLLoader.load(getClass().getResource("telas/escolher.fxml"));
+        escolherScene = new Scene(fxmlEscolher);
+
+        Parent fxmlEditado = FXMLLoader.load(getClass().getResource("telas/editado.fxml"));
+        editadoScene = new Scene(fxmlEditado);
 
         primaryStage.setScene(loginScene);
         primaryStage.setResizable(false);
@@ -94,6 +102,14 @@ public class Main extends Application {
 
                 stage.setScene(editarScene);
                 stage.setTitle("EDITAR");
+                break;
+            case "escolherUsuario":
+                stage.setScene(escolherScene);
+                stage.setTitle("SELECIONE UM USUÁRIO");
+                break;
+            case "editado":
+                stage.setScene(editadoScene);
+                stage.setTitle("EDITADO");
                 break;
         }
     }

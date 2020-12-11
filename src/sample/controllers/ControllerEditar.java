@@ -72,7 +72,7 @@ public class ControllerEditar {
 
                 object.close();
 
-                Main.changeScreen("sucesso");
+                Main.changeScreen("editado");
 
             } catch (FileNotFoundException e) {
                 System.out.println("Falha ao criar o arquivo");

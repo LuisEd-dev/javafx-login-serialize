@@ -46,7 +46,7 @@ public class ControllerHome extends Controller {
             Main.getStage().setTitle(String.valueOf(combo.valueProperty().get()));
             Main.changeScreen("editar");
         } else {
-            Main.changeScreen("vazio");
+            Main.changeScreen("escolherUsuario");
         }
 
     }

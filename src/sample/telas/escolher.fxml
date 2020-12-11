@@ -8,12 +8,12 @@
     <header>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0">
          <children>
-            <Label layoutX="120.0" layoutY="74.0" text="Senha Incorreta!">
+            <Label layoutX="90.0" layoutY="74.0" text="Escolha um Usuário!">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <Button fx:id="btnRetornar" layoutX="165.0" layoutY="127.0" mnemonicParsing="false" onMouseClicked="#retornarLogin" text="Retornar para tela de Login">
+            <Button layoutX="192.0" layoutY="127.0" mnemonicParsing="false" onMouseClicked="#retornarHome" text="Voltar para Home">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
