@@ -1,5 +1,7 @@
 package sample.controllers;
 
+import classes.Deserializar;
+import classes.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,8 +9,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import sample.Main;
 
-import java.io.File;
+
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class ControllerHome extends Controller {
 
@@ -18,25 +23,38 @@ public class ControllerHome extends Controller {
     private ComboBox<?> combo;
 
     @FXML
-    void carregarUsuarios(MouseEvent event) {
+    void carregarUsuarios(MouseEvent event) throws IOException, ClassNotFoundException {
 
         combo.getItems().clear();
         itens.removeAll();
 
-        File[] arquivos = new File("contas/").listFiles();
-
-        for (File arquivo : arquivos) {
-            itens.add(arquivo.getName().split(".acc")[0]);
-        }
+        new Deserializar().Deserializar().forEach(conta -> { itens.add(conta.getLogin()); });
 
         combo.setItems(itens);
     }
 
     @FXML
-    void deleteUsuario(MouseEvent event) throws IOException {
-        File usuario = new File("contas/" + combo.valueProperty().get() + ".acc");
-        if(usuario.delete())
-            Main.changeScreen("excluido");
+    void deleteUsuario(MouseEvent event) throws IOException, ClassNotFoundException {
+
+        ArrayList lista = new ArrayList();
+        Usuario delete = null;
+
+        for(Usuario usuario : new Deserializar().Deserializar()){
+            if(combo.valueProperty().get().equals(usuario.getLogin())){
+                delete = usuario;
+            }
+            lista.add(usuario);
+        }
+
+        lista.remove(delete);
+
+        FileOutputStream file = new FileOutputStream("contas/contas.acc");
+        ObjectOutputStream object = new ObjectOutputStream(file);
+        object.writeObject(lista);
+        object.close();
+
+        Main.changeScreen("excluido");
+
     }
 
     @FXML

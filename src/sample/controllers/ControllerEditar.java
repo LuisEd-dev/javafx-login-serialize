@@ -1,5 +1,6 @@
 package sample.controllers;
 
+import classes.Deserializar;
 import classes.Serializar;
 import classes.Usuario;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import sample.Main;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class ControllerEditar extends Controller{
 
@@ -66,11 +68,31 @@ public class ControllerEditar extends Controller{
         if(!txtEditarLogin.getText().equals("") && !txtEditarSenha.getText().equals("") && txtEditarSenhaConfirma.getText().equals(txtEditarSenha.getText())){
 
             try {
+
+                ArrayList lista = new ArrayList();
+                Usuario delete = null;
+
+                for(Usuario usuario : new Deserializar().Deserializar()){
+                    if(txtEditarLogin.getText().equals(usuario.getLogin())){
+                        delete = usuario;
+                    }
+                    lista.add(usuario);
+                }
+
+                lista.remove(delete);
+
+                FileOutputStream file = new FileOutputStream("contas/contas.acc");
+                ObjectOutputStream object = new ObjectOutputStream(file);
+                object.writeObject(lista);
+                object.close();
+
                 new Serializar(new Usuario(txtEditarLogin.getText(), txtEditarSenhaConfirma.getText(), chkCrip.isSelected(), "cadastrar"));
                 Main.changeScreen("editado");
             } catch (FileNotFoundException e) {
                 System.out.println("Falha ao criar o arquivo");
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
