@@ -1,7 +1,9 @@
 package sample.controllers;
 
 import classes.MD5;
+import classes.Serializar;
 import classes.Usuario;
+import classes.Verificar;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -48,23 +50,23 @@ public class ControllerLogin extends Controller {
     private CheckBox chkCrip;
 
     @FXML
-    void cadastrar(MouseEvent event) throws NoSuchAlgorithmException, IOException {
+    void cadastrar(MouseEvent event) throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
         if(!txtCadastroLogin.getText().equals("") && !txtCadastroSenha.getText().equals("")){
-            Usuario cadastro = new Usuario(txtCadastroLogin.getText(), txtCadastroSenha.getText(), chkCrip.isSelected(), "cadastrar");
 
-            try {
-                FileOutputStream file = new FileOutputStream("contas/" + cadastro.getLogin() + ".acc");
-                ObjectOutputStream object = new ObjectOutputStream(file);
-                object.writeObject(cadastro);
+            Usuario usuario = new Usuario(txtCadastroLogin.getText(), txtCadastroSenha.getText(), chkCrip.isSelected(), "cadastrar");
 
-                object.close();
-                tabPane.getSelectionModel().select(tabLogin);
-                Main.changeScreen("sucesso");
-
-            } catch (FileNotFoundException e) {
-                System.out.println("Falha ao criar o arquivo");
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(new Verificar().Verificar(usuario)){
+                try {
+                    new Serializar(usuario);
+                    tabPane.getSelectionModel().select(tabLogin);
+                    Main.changeScreen("sucesso");
+                } catch (FileNotFoundException e) {
+                    System.out.println("Falha ao criar o arquivo");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Main.changeScreen("usuarioRepetido");
             }
 
         } else {

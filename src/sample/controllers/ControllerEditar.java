@@ -1,5 +1,6 @@
 package sample.controllers;
 
+import classes.Serializar;
 import classes.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +12,7 @@ import sample.Main;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 
-public class ControllerEditar {
+public class ControllerEditar extends Controller{
 
     @FXML
     protected void initialize()  {
@@ -60,20 +61,13 @@ public class ControllerEditar {
     private Label lblAviso;
 
     @FXML
-    void editarUsuario(MouseEvent event) throws IOException, NoSuchAlgorithmException {
+    void editarUsuario(MouseEvent event) throws NoSuchAlgorithmException {
 
         if(!txtEditarLogin.getText().equals("") && !txtEditarSenha.getText().equals("") && txtEditarSenhaConfirma.getText().equals(txtEditarSenha.getText())){
-            Usuario editar = new Usuario(txtEditarLogin.getText(), txtEditarSenhaConfirma.getText(), chkCrip.isSelected(), "cadastrar");
 
             try {
-                FileOutputStream file = new FileOutputStream("contas/" + editar.getLogin() + ".acc");
-                ObjectOutputStream object = new ObjectOutputStream(file);
-                object.writeObject(editar);
-
-                object.close();
-
+                new Serializar(new Usuario(txtEditarLogin.getText(), txtEditarSenhaConfirma.getText(), chkCrip.isSelected(), "cadastrar"));
                 Main.changeScreen("editado");
-
             } catch (FileNotFoundException e) {
                 System.out.println("Falha ao criar o arquivo");
             } catch (IOException e) {

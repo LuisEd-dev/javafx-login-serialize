@@ -21,6 +21,7 @@ public class Main extends Application {
     private static Scene editarScene;
     private static Scene escolherScene;
     private static Scene editadoScene;
+    private static Scene repetidoScene;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -55,11 +56,18 @@ public class Main extends Application {
         Parent fxmlEditado = FXMLLoader.load(getClass().getResource("telas/editado.fxml"));
         editadoScene = new Scene(fxmlEditado);
 
+        Parent fxmlRepetido = FXMLLoader.load(getClass().getResource("telas/repetido.fxml"));
+        repetidoScene = new Scene(fxmlRepetido);
+
         primaryStage.setScene(loginScene);
         primaryStage.setResizable(false);
         primaryStage.show();
 
     }
+
+//    public static void main(String[] args) {
+//        launch(args);
+//    }
 
     public static void main(String[] args) {
         launch(args);
@@ -110,6 +118,10 @@ public class Main extends Application {
             case "editado":
                 stage.setScene(editadoScene);
                 stage.setTitle("EDITADO");
+                break;
+            case "usuarioRepetido":
+                stage.setScene(repetidoScene);
+                stage.setTitle("USUÁRIO JÁ CADASTRADO");
                 break;
         }
     }
